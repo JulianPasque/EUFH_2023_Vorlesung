@@ -16,6 +16,9 @@ public class Adress {
     public String postCode;
     public String houseNumber;
 
+    /**
+     * @return The city of the current adress
+     */
     public String getCity() {
         return city;
     }
