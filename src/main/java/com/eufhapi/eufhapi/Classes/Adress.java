@@ -1,5 +1,6 @@
 package com.eufhapi.eufhapi.Classes;
 
+//Das ist ein Testkommentar.
 public class Adress {
 
     // Constructors
