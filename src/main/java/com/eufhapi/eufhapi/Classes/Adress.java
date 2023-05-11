@@ -8,7 +8,7 @@ public class Adress {
         setCity(_city);
         setPostCode(_postCode);
         setHouseNumber(_houseNumber);
-        setStreet(_street);
+        setStreet(_houseNumber);
     }
 
     // Properties
