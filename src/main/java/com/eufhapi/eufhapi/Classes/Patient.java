@@ -13,7 +13,6 @@ import javax.crypto.NoSuchPaddingException;
 public class Patient extends Person {
 
     // Eigenschaften
-    
     private List<Treatment> treatments;
 
     // Methoden
