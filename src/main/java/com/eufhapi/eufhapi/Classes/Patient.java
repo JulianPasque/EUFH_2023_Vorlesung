@@ -22,9 +22,6 @@ public class Patient extends Person {
             BadPaddingException {
         super(id, firstName, lastName, birthdate, geschlecht, street, houseNumber, postCode, city, telefoneNumber,
                 email);
-
-        int i = hashCode();
-
     }
 
     public Patient(int id, String firstName, String lastName) {
