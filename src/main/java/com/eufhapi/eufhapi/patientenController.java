@@ -17,7 +17,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
+import com.eufhapi.eufhapi.Classes.Adress;
 import com.eufhapi.eufhapi.Classes.Patient;
+import com.eufhapi.eufhapi.Classes.Person;
 import com.eufhapi.eufhapi.Classes.Treatment;
 
 @RestController
@@ -401,7 +403,21 @@ public class patientenController {
          */
 
         @GetMapping("/Patienten")
-        public List<Patient> GetAllPatienten() {
+        public List<Patient> GetAllPatienten() throws Exception {
+
+                Patient P = new Patient(
+                                1,
+                                "Margaritta",
+                                "Frievü",
+                                LocalDate.of(1932, 5, 25),
+                                "w",
+                                "Lehmbergstra√üe",
+                                "140",
+                                "23738",
+                                "Beschendorf",
+                                "04363/38914683",
+                                "margaritta-friess@justmail.none");
+
                 try {
                         List<Patient> allPatients = new ArrayList<>(Data.size());
 
