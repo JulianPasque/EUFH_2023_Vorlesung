@@ -1,14 +1,8 @@
 package com.eufhapi.eufhapi.Classes;
 
-import java.security.InvalidKeyException;
-import java.security.NoSuchAlgorithmException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.crypto.BadPaddingException;
-import javax.crypto.IllegalBlockSizeException;
-import javax.crypto.NoSuchPaddingException;
 
 public class Patient extends Person {
 
@@ -18,8 +12,7 @@ public class Patient extends Person {
     // Methoden
     public Patient(int id, String firstName, String lastName, LocalDate birthdate, String geschlecht, String street,
             String houseNumber, String postCode, String city, String telefoneNumber, String email)
-            throws InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException,
-            BadPaddingException {
+            throws Exception {
         super(id, firstName, lastName, birthdate, geschlecht, street, houseNumber, postCode, city, telefoneNumber,
                 email);
     }

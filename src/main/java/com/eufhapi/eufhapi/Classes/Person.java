@@ -1,17 +1,7 @@
 package com.eufhapi.eufhapi.Classes;
 
-import java.security.InvalidKeyException;
-import java.security.KeyPair;
-import java.security.KeyPairGenerator;
-import java.security.NoSuchAlgorithmException;
-import java.security.PublicKey;
 import java.time.LocalDate;
 import java.time.Period;
-
-import javax.crypto.BadPaddingException;
-import javax.crypto.Cipher;
-import javax.crypto.IllegalBlockSizeException;
-import javax.crypto.NoSuchPaddingException;
 
 public class Person {
 
@@ -32,11 +22,10 @@ public class Person {
 
     private String email;
 
-    // Konstruktor
+    // Konstruktoren
     public Person(int id, String firstName, String lastName, LocalDate birthdate, String gender, String street,
             String houseNumber, String postCode, String city, String telefoneNumber, String email)
-            throws InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException,
-            BadPaddingException {
+            throws Exception {
         setId(id);
         setFirstName(firstName);
         setLastName(lastName);
@@ -51,7 +40,23 @@ public class Person {
         setId(id);
         setFirstName(firstName);
         setLastName(lastName);
+    }
 
+    public Person(int id, String firstName) {
+        setId(id);
+        setFirstName(firstName);
+    }
+
+    public Person(int id, String firstName, String lastName, LocalDate birthdate, String gender, String telefoneNumber,
+            String email)
+            throws Exception {
+        setId(id);
+        setFirstName(firstName);
+        setLastName(lastName);
+        setBirthdate(birthdate);
+        setGender(gender);
+        setTelefoneNumber(telefoneNumber);
+        setEmail(email);
     }
 
     // Getter & Setter
@@ -115,10 +120,9 @@ public class Person {
         return email;
     }
 
-    public void setEmail(String email) throws InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException,
-            IllegalBlockSizeException, BadPaddingException {
-        // Verschlüsselung
-        Encrypt(email);
+    public void setEmail(String email) throws Exception {
+        if (!email.contains("@"))
+            throw new Exception("email - must contain an @");
         this.email = email;
     }
 
@@ -127,25 +131,5 @@ public class Person {
         LocalDate currentDate = LocalDate.now();
 
         return Period.between(birthdate, currentDate).getYears();
-    }
-
-    private PublicKey GetPublicKey() throws NoSuchAlgorithmException {
-        KeyPairGenerator generator = KeyPairGenerator.getInstance("RSA");
-        generator.initialize(2048);
-        KeyPair pair = generator.generateKeyPair();
-
-        return pair.getPublic();
-    }
-
-    private byte[] Encrypt(String orignalText) throws NoSuchAlgorithmException, NoSuchPaddingException,
-            InvalidKeyException, IllegalBlockSizeException, BadPaddingException {
-
-        Cipher enrycptedCipher = Cipher.getInstance("RSA");
-
-        enrycptedCipher.init(Cipher.ENCRYPT_MODE, GetPublicKey());
-
-        byte[] enryptedData = enrycptedCipher.doFinal(orignalText.getBytes());
-
-        return enryptedData;
     }
 }
