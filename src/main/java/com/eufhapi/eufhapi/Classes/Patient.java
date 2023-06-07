@@ -5,7 +5,7 @@ import java.time.LocalDate;
 public class Patient extends Person {
 
     // Eigenschaften
-    private PrefrentialContactApproach preferedContact;
+    private PrefrentialContactApproach communicationMethod;
 
     private LocalDate lastTreatment;
 
@@ -17,18 +17,18 @@ public class Patient extends Person {
         super(id, firstName, lastName, birthdate, geschlecht, street, houseNumber, postCode, city, telefoneNumber,
                 email);
 
-        setPreferedContact(contact);
+        setCommunicationMethod(contact);
         setLastTreatment(lastTreatment);
     }
 
     // Getter & Setter
 
-    public PrefrentialContactApproach getPreferedContact() {
-        return preferedContact;
+    public PrefrentialContactApproach getCommunicationMethod() {
+        return communicationMethod;
     }
 
-    public void setPreferedContact(PrefrentialContactApproach preferedContact) {
-        this.preferedContact = preferedContact;
+    public void setCommunicationMethod(PrefrentialContactApproach preferedContact) {
+        this.communicationMethod = preferedContact;
     }
 
     public LocalDate getLastTreatment() {
