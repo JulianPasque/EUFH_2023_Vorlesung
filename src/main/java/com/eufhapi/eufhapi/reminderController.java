@@ -464,12 +464,14 @@ public class reminderController {
                 PrefrentialContactApproach preferedApproach = PrefrentialContactApproach
                                 .valueOf(ContactApproach.toUpperCase());
 
+                patientsToInform = new ArrayList<Patient>();
                 /*
                  * Zu implementieren:
-                 * 
+                 * Alle Patienten mit dem entsprechenden präferierten Kontaktmedium müssen der
+                 * patientsToInform hinzugefügt werden, wenn diese Informiert werden müssen.
                  */
 
-                return null;
+                return patientsToInform;
         }
 
 }
