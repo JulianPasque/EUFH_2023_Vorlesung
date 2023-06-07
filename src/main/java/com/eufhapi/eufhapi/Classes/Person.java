@@ -36,29 +36,6 @@ public class Person {
         setAdress(new Adress(city, street, postCode, houseNumber));
     }
 
-    public Person(int id, String firstName, String lastName) {
-        setId(id);
-        setFirstName(firstName);
-        setLastName(lastName);
-    }
-
-    public Person(int id, String firstName) {
-        setId(id);
-        setFirstName(firstName);
-    }
-
-    public Person(int id, String firstName, String lastName, LocalDate birthdate, String gender, String telefoneNumber,
-            String email)
-            throws Exception {
-        setId(id);
-        setFirstName(firstName);
-        setLastName(lastName);
-        setBirthdate(birthdate);
-        setGender(gender);
-        setTelefoneNumber(telefoneNumber);
-        setEmail(email);
-    }
-
     // Getter & Setter
     public int getId() {
         return id;

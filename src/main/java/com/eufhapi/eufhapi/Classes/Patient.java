@@ -1,39 +1,46 @@
 package com.eufhapi.eufhapi.Classes;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 
 public class Patient extends Person {
 
     // Eigenschaften
-    private List<Treatment> treatments;
+    private PrefrentialContactApproach preferedContact;
 
-    // Methoden
+    private LocalDate lastTreatment;
+
+    // Konstruktoren
     public Patient(int id, String firstName, String lastName, LocalDate birthdate, String geschlecht, String street,
-            String houseNumber, String postCode, String city, String telefoneNumber, String email)
+            String houseNumber, String postCode, String city, String telefoneNumber, String email,
+            PrefrentialContactApproach contact, LocalDate lastTreatment)
             throws Exception {
         super(id, firstName, lastName, birthdate, geschlecht, street, houseNumber, postCode, city, telefoneNumber,
                 email);
+
+        setPreferedContact(contact);
+        setLastTreatment(lastTreatment);
     }
 
-    public Patient(int id, String firstName, String lastName) {
-        super(id, firstName, lastName);
+    // Getter & Setter
 
+    public PrefrentialContactApproach getPreferedContact() {
+        return preferedContact;
     }
 
-    public List<Treatment> getTreatments() {
-        return treatments;
+    public void setPreferedContact(PrefrentialContactApproach preferedContact) {
+        this.preferedContact = preferedContact;
     }
 
-    public void setTreatments(List<Treatment> treatments) {
-        this.treatments = treatments;
+    public LocalDate getLastTreatment() {
+        return lastTreatment;
     }
 
-    public void addTreatment(Treatment treatment) {
-        if (getTreatments() == null)
-            setTreatments(new ArrayList<Treatment>());
+    public void setLastTreatment(LocalDate lastTreatment) {
+        this.lastTreatment = lastTreatment;
+    }
 
-        getTreatments().add(treatment);
+    // Methoden
+    public boolean CheckIfReminderIsRequired() {
+        return getLastTreatment().isBefore(LocalDate.now().minusYears(1));
     }
 }

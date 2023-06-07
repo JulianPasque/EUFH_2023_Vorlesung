@@ -4,21 +4,21 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
+
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.server.ResponseStatusException;
 
 import com.eufhapi.eufhapi.Classes.Patient;
 import com.eufhapi.eufhapi.Classes.PrefrentialContactApproach;
 
 @RestController
-public class patientenController {
+public class reminderController {
 
-        public patientenController() {
+        private List<Patient> Data;
+
+        public reminderController() {
                 try {
 
                         Data = new ArrayList<>(Arrays.asList(
@@ -448,57 +448,28 @@ public class patientenController {
                 }
         }
 
-        /*
-         * Get - Laden von Informationen
-         * Post - Speichern von Informationen
-         * Put - Speichern von Informationen
-         * Delete - Löschen von Informationen
-         * Patch - Aktualisieren von Informationen
-         */
+        @GetMapping("/Reminder")
+        @ResponseBody
+        public List<Patient> patientsToRemind(@RequestParam(required = false) String ContactApproach) {
 
-        /*
-         * @GetMapping("/Patienten")
-         * public List<Patient> GetAllPatienten() {
-         * try {
-         * List<Patient> allPatients = new ArrayList<>(Data.size());
-         * 
-         * for (int i = 0; i < Data.size(); ++i) {
-         * Patient currentPatient = Data.get(i);
-         * allPatients.add(new Patient(currentPatient.getId(),
-         * currentPatient.getFirstName(),
-         * currentPatient.getLastName()));
-         * }
-         * return allPatients;
-         * } catch (Exception e) {
-         * return null;
-         * }
-         * }
-         */
+                // Diese Liste muss mit zu informierenden Patienten befüllt werden.
+                List<Patient> patientsToInform;
 
-        @GetMapping("/Patienten")
-        public List<Patient> GetAllPatienten() {
-                try {
-                        List<Patient> allPatients = new ArrayList<>(Data);
+                if (ContactApproach == null) {
+                        patientsToInform = Data;
 
-                        return allPatients;
-                } catch (Exception e) {
-                        return null;
+                        return patientsToInform;
                 }
+
+                PrefrentialContactApproach preferedApproach = PrefrentialContactApproach
+                                .valueOf(ContactApproach.toUpperCase());
+
+                /*
+                 * Zu implementieren:
+                 * 
+                 */
+
+                return null;
         }
 
-        @DeleteMapping("/Patienten/{id}")
-        public ResponseEntity<Long> DeletePatientById(@PathVariable int id) {
-
-                for (int i = 0; i < Data.size(); ++i) {
-                        Patient currentPatient = Data.get(i);
-                        if (currentPatient.getId() == id) {
-
-                                Data.remove(i);
-                                return new ResponseEntity<Long>(HttpStatus.OK);
-                        }
-                }
-                throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Patient nicht gefunden");
-        }
-
-        private List<Patient> Data;
 }
